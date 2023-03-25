@@ -43,6 +43,7 @@ public class ProductDataSource {
 				item.setDescription(c.getString(c.getColumnIndex(DbSchema.COL_PRODUCT_DESCRIPTION)));
 				item.setPrice(c.getDouble(c.getColumnIndex(DbSchema.COL_PRODUCT_PRICE)));
 				item.setStock(c.getInt(c.getColumnIndex(DbSchema.COL_PRODUCT_STOCK)));
+				item.setDiscount(c.getInt(c.getColumnIndex(DbSchema.COL_PRODUCT_DISCOUNT)));
 				item.setCreateBy(c.getString(c.getColumnIndex(DbSchema.COL_PRODUCT_CREATED_BY)));
 				item.setUpdatedBy(c.getString(c.getColumnIndex(DbSchema.COL_PRODUCT_UPDATED_BY)));
 				item.setMerchantID(c.getString(c.getColumnIndex(DbSchema.COL_PRODUCT_MERCHANT_ID)));
@@ -99,6 +100,7 @@ public class ProductDataSource {
 				item.setDescription(c.getString(c.getColumnIndex(DbSchema.COL_PRODUCT_DESCRIPTION)));
 				item.setPrice(c.getDouble(c.getColumnIndex(DbSchema.COL_PRODUCT_PRICE)));
 				item.setStock(c.getInt(c.getColumnIndex(DbSchema.COL_PRODUCT_STOCK)));
+				item.setDiscount(c.getInt(c.getColumnIndex(DbSchema.COL_PRODUCT_DISCOUNT)));
 				item.setCreateBy(c.getString(c.getColumnIndex(DbSchema.COL_PRODUCT_CREATED_BY)));
 				item.setUpdatedBy(c.getString(c.getColumnIndex(DbSchema.COL_PRODUCT_UPDATED_BY)));
 				item.setMerchantID(c.getString(c.getColumnIndex(DbSchema.COL_PRODUCT_MERCHANT_ID)));
@@ -128,6 +130,7 @@ public class ProductDataSource {
 		values.put(DbSchema.COL_PRODUCT_DESCRIPTION, item.getDescription());
 		values.put(DbSchema.COL_PRODUCT_PRICE, item.getPrice());
 		values.put(DbSchema.COL_PRODUCT_STOCK, item.getStock());
+		values.put(DbSchema.COL_PRODUCT_DISCOUNT, item.getDiscount());
 		values.put(DbSchema.COL_PRODUCT_CREATED_BY, "Device");
 		values.put(DbSchema.COL_PRODUCT_UPDATED_BY, "Device");
 		values.put(DbSchema.COL_PRODUCT_MERCHANT_ID, item.getMerchantID());
@@ -177,6 +180,7 @@ public class ProductDataSource {
 		
 		values.put(DbSchema.COL_PRODUCT_PRICE, item.getPrice());
 		values.put(DbSchema.COL_PRODUCT_STOCK, item.getStock());
+		values.put(DbSchema.COL_PRODUCT_DISCOUNT, item.getDiscount());
 
 	//	values.put(DbSchema.COL_PRODUCT_CREATED_ON, Shared.dateformat.format(item.getCreatedOn()));
 		values.put(DbSchema.COL_PRODUCT_UPDATED_ON, Shared.dateformat.format(new Date()));

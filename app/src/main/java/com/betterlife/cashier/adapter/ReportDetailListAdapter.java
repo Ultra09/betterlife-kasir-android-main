@@ -16,11 +16,12 @@ import com.betterlife.cashier.utils.Shared;
 import java.util.List;
 
 public class ReportDetailListAdapter extends BaseAdapter {
-
+    private Context context;
     private List<OrderDetails> dtList;
     private LayoutInflater inflater;
 
     public ReportDetailListAdapter(FragmentActivity context) {
+        this.context = context;
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
@@ -28,6 +29,7 @@ public class ReportDetailListAdapter extends BaseAdapter {
         TextView tanggalOrder;
         TextView totalItem;
         TextView totalHarga;
+        TextView totalDiscount;
     }
 
     public int getCount() {
@@ -58,6 +60,7 @@ public class ReportDetailListAdapter extends BaseAdapter {
             holder.tanggalOrder = (TextView) vi.findViewById(R.id.textView1);
             holder.totalItem = (TextView) vi.findViewById(R.id.textView2);
             holder.totalHarga = (TextView) vi.findViewById(R.id.textView3);
+            holder.totalDiscount = (TextView) vi.findViewById(R.id.textView4);
             vi.setTag(holder);
         } else {
             holder = (ViewHolder) vi.getTag();
@@ -67,8 +70,9 @@ public class ReportDetailListAdapter extends BaseAdapter {
 
         // set data to view
         holder.tanggalOrder.setText(details.getProductName());
-        holder.totalItem.setText("Total item: " + details.getQty());
-        holder.totalHarga.setText("Harga: Rp. " + details.getPrice());
+        holder.totalItem.setText(context.getString(R.string.total_item) + details.getQty());
+        holder.totalHarga.setText(context.getString(R.string.price) + ": Rp. " + details.getPrice());
+        holder.totalDiscount.setText(context.getString(R.string.discount) + ": Rp. " + details.getDiscount());
 
         return vi;
     }

@@ -46,6 +46,7 @@ public class PdfGenerator {
                 200f,
                 100f,
                 200f,
+                200f,
         };
 
         Table table = new Table(UnitValue.createPointArray(values));
@@ -54,34 +55,31 @@ public class PdfGenerator {
         paintHeaderCell(table, "Tanggal");
         paintHeaderCell(table, "Total Penjualan");
         paintHeaderCell(table, "Total Harga");
+        paintHeaderCell(table, "Total Dikon");
 
         for (int i = 0; i < orders.size(); i++) {
             String date = Shared.formatDate(orders.get(i).getCreatedOn());
 
-            int totalHarga = 0;
-
-            // menghitung total item dan harga
-            for (OrderDetails details : orders.get(i).getOrderDetails()) {
-                totalHarga += (details.getQty() * details.getPrice());
-            }
-
             table.addCell(new Paragraph(String.valueOf(i + 1)).setTextAlignment(TextAlignment.CENTER));
             table.addCell(new Paragraph(date));
             table.addCell(new Paragraph(String.valueOf(orders.get(i).getOrderDetails().size())));
-            table.addCell(new Paragraph("Rp. " + totalHarga));
+            table.addCell(new Paragraph("Rp. " + orders.get(i).getAmount()));
+            table.addCell(new Paragraph("Rp. " + orders.get(i).getDiscount()));
 
             // order details
             paintHeaderCell(table, "");
             paintHeaderCell(table, "Nama Produk");
             paintHeaderCell(table, "Kuantitas");
             paintHeaderCell(table, "Harga");
+            paintHeaderCell(table, "Diskon");
             for (int j = 0; j < orders.get(i).getOrderDetails().size(); j++) {
                 OrderDetails details = orders.get(i).getOrderDetails().get(j);
 
                 table.addCell(new Paragraph(""));
                 table.addCell(new Paragraph(details.getProductName()));
                 table.addCell(new Paragraph(String.valueOf(details.getQty())));
-                table.addCell(new Paragraph("Rp. " + (int)(details.getQty() * details.getPrice())));
+                table.addCell(new Paragraph("Rp. " + (int)(details.getPrice())));
+                table.addCell(new Paragraph("Rp. " + (int)(details.getDiscount())));
             }
         }
 

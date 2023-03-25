@@ -73,5 +73,9 @@
     <string name="data_user">Data User</string>
     <string name="data_category">Data Category</string>
     <string name="data_product">Data Product</string>
+    <string name="discount">Discount</string>
+    <string name="total_item">Total Item: </string>
+    <string name="total_price">Total Price: </string>
+    <string name="total_discount">Total Discount: </string>
 
 </resources>

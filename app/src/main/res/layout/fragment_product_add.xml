@@ -125,6 +125,20 @@
                     android:singleLine="true" />
 
                 <TextView
+                    android:id="@+id/textViewDiscount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/discount" />
+
+                <EditText
+                    android:id="@+id/editTextDiscount"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:inputType="numberSigned"
+                    android:singleLine="true" />
+
+                <TextView
                     android:id="@+id/textView4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

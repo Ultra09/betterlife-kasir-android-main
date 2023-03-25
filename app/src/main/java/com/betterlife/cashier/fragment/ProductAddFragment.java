@@ -61,6 +61,7 @@ public class ProductAddFragment extends Fragment {
     private EditText txtName;
     private EditText txtPrice;
     private EditText txtStock;
+    private EditText txtDiscount;
     private EditText txtDescription;
 
     private RadioGroup radioGroup;
@@ -91,6 +92,7 @@ public class ProductAddFragment extends Fragment {
         TextView t2 = (TextView) rootView.findViewById(R.id.textView2);
         TextView t3 = (TextView) rootView.findViewById(R.id.textView3);
         TextView t4 = (TextView) rootView.findViewById(R.id.textView4);
+        TextView t5 = (TextView) rootView.findViewById(R.id.textViewDiscount);
         TextView t6 = (TextView) rootView.findViewById(R.id.textView6);
         TextView t7 = (TextView) rootView.findViewById(R.id.textView7);
         TextView tStock = (TextView) rootView.findViewById(R.id.textViewStock);
@@ -107,6 +109,7 @@ public class ProductAddFragment extends Fragment {
         t2.setTypeface(Shared.OpenSansRegular);
         t3.setTypeface(Shared.OpenSansRegular);
         t4.setTypeface(Shared.OpenSansRegular);
+        t5.setTypeface(Shared.OpenSansRegular);
         t6.setTypeface(Shared.OpenSansRegular);
         t7.setTypeface(Shared.OpenSansRegular);
         tStock.setTypeface(Shared.OpenSansRegular);
@@ -119,6 +122,9 @@ public class ProductAddFragment extends Fragment {
 
         txtStock = (EditText) rootView.findViewById(R.id.editTextStock);
         txtStock.setTypeface(Shared.OpenSansRegular);
+
+        txtDiscount = (EditText) rootView.findViewById(R.id.editTextDiscount);
+        txtDiscount.setTypeface(Shared.OpenSansRegular);
 
         txtDescription = (EditText) rootView.findViewById(R.id.editText4);
         txtDescription.setTypeface(Shared.OpenSansRegular);
@@ -164,6 +170,7 @@ public class ProductAddFragment extends Fragment {
             txtName.setText(dt.getProductName());
             txtPrice.setText(Shared.decimalformat2.format(dt.getPrice()));
             txtStock.setText(String.valueOf(dt.getStock()));
+            txtDiscount.setText(String.valueOf((int)dt.getDiscount()));
             txtDescription.setText(dt.getDescription());
 
             radio1.setChecked(true);
@@ -188,10 +195,10 @@ public class ProductAddFragment extends Fragment {
 
         @Override
         public void onClick(View v) {
-            // TODO Auto-generated method stub
             String name = txtName.getText().toString();
             String price = txtPrice.getText().toString();
             String stock = txtStock.getText().toString();
+            String discount = txtDiscount.getText().toString();
             String description = txtDescription.getText().toString();
 
             ProductCategory cat = (ProductCategory) spinnerCategory.getSelectedItem();
@@ -227,6 +234,7 @@ public class ProductAddFragment extends Fragment {
             data.setImage(saveImage());
             data.setPrice(Double.parseDouble(price));
             data.setStock(Integer.parseInt(stock));
+            data.setDiscount(Double.parseDouble(discount));
             data.setDescription(description);
             data.setCategoryID(category);
             data.setBranchID(Shared.read(Constants.KEY_SETTING_BRANCH_ID));

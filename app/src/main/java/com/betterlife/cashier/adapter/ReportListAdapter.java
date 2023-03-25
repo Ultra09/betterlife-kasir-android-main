@@ -39,6 +39,7 @@ public class ReportListAdapter extends BaseAdapter {
         TextView tanggalOrder;
         TextView totalItem;
         TextView totalHarga;
+        TextView totalDiscount;
         RelativeLayout reportListItem;
     }
 
@@ -70,6 +71,7 @@ public class ReportListAdapter extends BaseAdapter {
             holder.tanggalOrder = (TextView) vi.findViewById(R.id.textView1);
             holder.totalItem = (TextView) vi.findViewById(R.id.textView2);
             holder.totalHarga = (TextView) vi.findViewById(R.id.textView3);
+            holder.totalDiscount= (TextView) vi.findViewById(R.id.textView4);
             holder.reportListItem = (RelativeLayout) vi.findViewById(R.id.report_list_item);
             vi.setTag(holder);
         } else {
@@ -78,12 +80,10 @@ public class ReportListAdapter extends BaseAdapter {
 
         final Order order = (Order) getItem(position);
         int totalItem = 0;
-        int totalHarga = 0;
 
         // menghitung total item dan harga
         for (OrderDetails details : order.getOrderDetails()) {
             totalItem += details.getQty();
-            totalHarga += (details.getQty() * details.getPrice());
         }
 
         // format tanggal
@@ -91,8 +91,9 @@ public class ReportListAdapter extends BaseAdapter {
 
         // set data to view
         holder.tanggalOrder.setText(date);
-        holder.totalItem.setText("Total item: " + totalItem);
-        holder.totalHarga.setText("Total Harga: Rp. " + totalHarga);
+        holder.totalItem.setText(context.getString(R.string.total_item) + totalItem);
+        holder.totalHarga.setText(context.getString(R.string.total_price) + "Rp. " + order.getAmount());
+        holder.totalDiscount.setText(context.getString(R.string.total_discount) + "Rp. " + order.getDiscount());
         holder.reportListItem.setOnClickListener(
                 new View.OnClickListener() {
                     @Override

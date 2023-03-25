@@ -45,7 +45,7 @@ public class OrderDataSource {
                 item.setOrderID(c.getString(c.getColumnIndex(DbSchema.COL_ORDER_CODE)));
                 item.setDescription(c.getString(c.getColumnIndex(DbSchema.COL_ORDER_DESCRIPTION)));
                 item.setAmount(c.getDouble(c.getColumnIndex(DbSchema.COL_ORDER_AMOUNT)));
-                item.setDiscount(c.getDouble(c.getColumnIndex(DbSchema.COL_ORDER_DESCRIPTION)));
+                item.setDiscount(c.getDouble(c.getColumnIndex(DbSchema.COL_ORDER_DISCOUNT)));
                 item.setBranchID(c.getString(c.getColumnIndex(DbSchema.COL_ORDER_BRANCH_ID)));
                 item.setUserID(c.getString(c.getColumnIndex(DbSchema.COL_ORDER_USER_ID)));
 
@@ -138,7 +138,7 @@ public class OrderDataSource {
                 item.setOrderID(c.getString(c.getColumnIndex(DbSchema.COL_ORDER_CODE)));
                 item.setDescription(c.getString(c.getColumnIndex(DbSchema.COL_ORDER_DESCRIPTION)));
                 item.setAmount(c.getDouble(c.getColumnIndex(DbSchema.COL_ORDER_AMOUNT)));
-                item.setDiscount(c.getDouble(c.getColumnIndex(DbSchema.COL_ORDER_DESCRIPTION)));
+                item.setDiscount(c.getDouble(c.getColumnIndex(DbSchema.COL_ORDER_DISCOUNT)));
                 item.setBranchID(c.getString(c.getColumnIndex(DbSchema.COL_ORDER_BRANCH_ID)));
                 item.setUserID(c.getString(c.getColumnIndex(DbSchema.COL_ORDER_USER_ID)));
 

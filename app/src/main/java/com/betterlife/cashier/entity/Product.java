@@ -12,6 +12,7 @@ public class Product{
 	private String description;
 	private double price;
 	private int stock;
+	private double discount;
 	private Date createdOn;
 	private Date updatedOn;
 	private Date sycnOn;
@@ -65,6 +66,12 @@ public class Product{
 	}
 	public void setStock(int stock) {
 		this.stock = stock;
+	}
+	public double getDiscount() {
+		return discount;
+	}
+	public void setDiscount(double discount) {
+		this.discount = discount;
 	}
 	public Date getCreatedOn() {
 		return createdOn;

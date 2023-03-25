@@ -73,5 +73,9 @@
     <string name="data_user">Data Pengguna</string>
     <string name="data_category">Data Kategori</string>
     <string name="data_product">Data Produk</string>
+    <string name="discount">Diskon</string>
+    <string name="total_item">Total Item: </string>
+    <string name="total_price">Total Harga: </string>
+    <string name="total_discount">Total Diskon: </string>
 
 </resources>

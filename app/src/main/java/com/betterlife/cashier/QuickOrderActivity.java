@@ -12,6 +12,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -382,23 +383,27 @@ public class QuickOrderActivity extends BaseActivity {
 
             ArrayList<OrderDetails> detaillist = new ArrayList<OrderDetails>();
             double subtotal = 0;
-            double disc = 0;
+            double totalDisc = 0;
             for (int i = 0; i < cartadapter.getCount(); i++) {
                 Cart cart = (Cart) cartadapter.getItem(i);
                 Product product = DS.get(cart.getProductID());
 
                 OrderDetails detail = new OrderDetails();
                 detail.setDetailID(Shared.getOrderDetailID(i));
-                detail.setDiscount(cart.getDiscount());
                 detail.setName(cart.getProductName());
                 detail.setQty(cart.getQty());
-                detail.setPrice(cart.getPrice());
                 detail.setProductID(cart.getProductID());
                 detail.setOrderID(order.getOrderID());
-                detaillist.add(detail);
 
-                subtotal += detail.getQty() * product.getPrice();
-                disc += subtotal * (detail.getDiscount() / 100);
+                double total = detail.getQty() * product.getPrice();
+                double disc = total * (product.getDiscount() / 100);
+                subtotal += total;
+                total -= disc;
+                totalDisc += disc;
+
+                detail.setPrice(total);
+                detail.setDiscount(disc);
+                detaillist.add(detail);
 
                 // update stock
                 int updatedStock = product.getStock() - detail.getQty();
@@ -407,11 +412,11 @@ public class QuickOrderActivity extends BaseActivity {
             }
 
             order.setOrderDetails(detaillist);
+            order.setDiscount(totalDisc);
 
-            order.setDiscount(disc);
-
-            double sub = subtotal - disc;
-            double tax = sub * (Double.parseDouble(Shared.read(Constants.KEY_SETTING_TAX, Constants.VAL_DEFAULT_TAX)) / 100);
+            double sub = subtotal - totalDisc;
+//            double tax = sub * (Double.parseDouble(Shared.read(Constants.KEY_SETTING_TAX, Constants.VAL_DEFAULT_TAX)) / 100);
+            double tax = 0;
 
             order.setTax(tax);
             order.setAmount(sub + tax);
