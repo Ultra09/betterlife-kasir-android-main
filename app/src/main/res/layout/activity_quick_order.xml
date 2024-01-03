@@ -159,7 +159,7 @@
                  android:layout_height="wrap_content"
                  android:padding="5dp"
                  android:layout_marginLeft="8dp"
-                  android:layout_above="@+id/relativeLayout2" >
+                  android:layout_above="@+id/relativeLayout5" >
                  <TextView
                      android:id="@+id/textView2"
                      android:layout_width="wrap_content"
@@ -179,6 +179,33 @@
 
              </RelativeLayout>
 
+             <RelativeLayout
+                 android:id="@+id/relativeLayout5"
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:padding="5dp"
+                 android:layout_marginLeft="8dp"
+                 android:layout_above="@+id/relativeLayout2" >
+                 <TextView
+                     android:id="@+id/textViewLabelDiscount"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:textSize="14dp"
+                     android:textColor="@color/item"
+                     android:textAllCaps="true"
+                     android:text="@string/discount" />
+
+                 <TextView
+                     android:id="@+id/textViewDiscount"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:layout_below="@+id/textViewLabelDiscount"
+                     android:textSize="20dp"
+                     android:text="Rp. 0"
+                     android:textColor="@color/blue" />
+
+             </RelativeLayout>
+
              <TextView
                  android:id="@+id/textView9"
                  android:layout_width="wrap_content"
@@ -192,7 +219,7 @@
                  android:id="@+id/listView1"
                  android:layout_width="match_parent"
                  android:layout_height="match_parent"
-                 android:layout_above="@+id/relativeLayout4"
+                 android:layout_above="@+id/relativeLayout5"
                  android:layout_alignParentTop="true"
                  android:layout_centerInParent="true"
                  android:layout_marginLeft="8dp"

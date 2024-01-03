@@ -64,6 +64,7 @@ public class QuickOrderActivity extends BaseActivity {
     private ListView cartList;
 
     private TextView txtTotal;
+    private TextView txtDiscount;
     private TextView txtTotal2;
     private EditText txtKeyword;
     private EditText txtPayment;
@@ -131,6 +132,7 @@ public class QuickOrderActivity extends BaseActivity {
         cartList.setAdapter(cartadapter);
 
         txtTotal = (TextView) findViewById(R.id.textView3);
+        txtDiscount = (TextView) findViewById(R.id.textViewDiscount);
         txtTotal2 = (TextView) findViewById(R.id.textView5);
         txtKeyword = (EditText) findViewById(R.id.editText1);
         txtPayment = (EditText) findViewById(R.id.editText2);
@@ -170,16 +172,26 @@ public class QuickOrderActivity extends BaseActivity {
             public void onChange(List<Cart> list) {
                 // TODO Auto-generated method stub
                 double mtotal = 0;
+                double mTotalWithoutDisc = 0;
+                double mDiscount = 0;
+
                 for (int i = 0; i < list.size(); i++) {
                     double sub = (list.get(i).getPrice() * list.get(i).getQty());
                     double discount = sub * (list.get(i).getDiscount() / 100);
                     double subtotal = sub - discount;
+
+                    mDiscount += discount;
+                    mTotalWithoutDisc += sub;
                     mtotal += subtotal;
+                    Log.d("TEST #2", String.valueOf(list.get(i).getDiscount()));
                 }
 
+                Log.d("TEST", String.valueOf(mDiscount));
                 total = mtotal;
-                txtTotal.setText(Shared.read(Constants.KEY_SETTING_CURRENCY_SYMBOL, Constants.VAL_DEFAULT_CURRENCY_SYMBOL) + "" + Shared.decimalformat.format(mtotal));
-                txtTotal2.setText(txtTotal.getText().toString());
+                txtTotal.setText(Shared.read(Constants.KEY_SETTING_CURRENCY_SYMBOL, Constants.VAL_DEFAULT_CURRENCY_SYMBOL) + "" + Shared.decimalformat.format(mTotalWithoutDisc));
+                txtDiscount.setText(Shared.read(Constants.KEY_SETTING_CURRENCY_SYMBOL, Constants.VAL_DEFAULT_CURRENCY_SYMBOL) + "" + Shared.decimalformat.format(mDiscount));
+
+                txtTotal2.setText(Shared.read(Constants.KEY_SETTING_CURRENCY_SYMBOL, Constants.VAL_DEFAULT_CURRENCY_SYMBOL) + "" + Shared.decimalformat.format(mtotal));
 
                 if (cartadapter.getCount() == 0) txtempty.setVisibility(View.VISIBLE);
                 else txtempty.setVisibility(View.GONE);
@@ -211,6 +223,7 @@ public class QuickOrderActivity extends BaseActivity {
 
         txtKeyword.setTypeface(Shared.openSansLightItalic);
         txtTotal.setTypeface(Shared.OpenSansBold);
+        txtDiscount.setTypeface(Shared.OpenSansBold);
         txtTotal2.setTypeface(Shared.OpenSansBold);
         txtChange.setTypeface(Shared.OpenSansBold);
 
@@ -262,6 +275,7 @@ public class QuickOrderActivity extends BaseActivity {
                     cart.setProductID(product.getProductID());
                     cart.setProductName(product.getProductName());
                     cart.setPrice(product.getPrice());
+                    cart.setDiscount(product.getDiscount());
                     cart.setQty(1);
 
                     cart.setSubtotal(cart.getPrice());

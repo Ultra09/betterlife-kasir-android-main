@@ -7,6 +7,7 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.betterlife.cashier.entity.Product;
 import com.betterlife.cashier.sqlite.DbSchema;
@@ -43,7 +44,7 @@ public class ProductDataSource {
 				item.setDescription(c.getString(c.getColumnIndex(DbSchema.COL_PRODUCT_DESCRIPTION)));
 				item.setPrice(c.getDouble(c.getColumnIndex(DbSchema.COL_PRODUCT_PRICE)));
 				item.setStock(c.getInt(c.getColumnIndex(DbSchema.COL_PRODUCT_STOCK)));
-				item.setDiscount(c.getInt(c.getColumnIndex(DbSchema.COL_PRODUCT_DISCOUNT)));
+				item.setDiscount(c.getDouble(c.getColumnIndex(DbSchema.COL_PRODUCT_DISCOUNT)));
 				item.setCreateBy(c.getString(c.getColumnIndex(DbSchema.COL_PRODUCT_CREATED_BY)));
 				item.setUpdatedBy(c.getString(c.getColumnIndex(DbSchema.COL_PRODUCT_UPDATED_BY)));
 				item.setMerchantID(c.getString(c.getColumnIndex(DbSchema.COL_PRODUCT_MERCHANT_ID)));
@@ -93,6 +94,7 @@ public class ProductDataSource {
 		if (c.moveToFirst()) {
 			do {
 				Product item = new Product();
+				Log.d("POP", String.valueOf(c.getDouble(c.getColumnIndex(DbSchema.COL_PRODUCT_DISCOUNT))));
 				item.setProductID(c.getString(c.getColumnIndex(DbSchema.COL_PRODUCT_CODE)));
 				item.setProductName(c.getString(c.getColumnIndex(DbSchema.COL_PRODUCT_NAME)));
 				item.setCategoryID(c.getString(c.getColumnIndex(DbSchema.COL_PRODUCT_CATEGORY_CODE)));
@@ -100,7 +102,7 @@ public class ProductDataSource {
 				item.setDescription(c.getString(c.getColumnIndex(DbSchema.COL_PRODUCT_DESCRIPTION)));
 				item.setPrice(c.getDouble(c.getColumnIndex(DbSchema.COL_PRODUCT_PRICE)));
 				item.setStock(c.getInt(c.getColumnIndex(DbSchema.COL_PRODUCT_STOCK)));
-				item.setDiscount(c.getInt(c.getColumnIndex(DbSchema.COL_PRODUCT_DISCOUNT)));
+				item.setDiscount(c.getDouble(c.getColumnIndex(DbSchema.COL_PRODUCT_DISCOUNT)));
 				item.setCreateBy(c.getString(c.getColumnIndex(DbSchema.COL_PRODUCT_CREATED_BY)));
 				item.setUpdatedBy(c.getString(c.getColumnIndex(DbSchema.COL_PRODUCT_UPDATED_BY)));
 				item.setMerchantID(c.getString(c.getColumnIndex(DbSchema.COL_PRODUCT_MERCHANT_ID)));
@@ -113,7 +115,8 @@ public class ProductDataSource {
 				    item.setSycnOn( Shared.dateformat.parse(c.getString(c.getColumnIndex(DbSchema.COL_PRODUCT_SYCN_ON))));
 				} catch (Exception e) {  
 				}
-				
+
+				Log.d("POP #2", String.valueOf(item.getDiscount()));
 				items.add(item);
 			} while (c.moveToNext());
 		}
